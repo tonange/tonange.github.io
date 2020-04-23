@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}" href="../static/images/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" type="image/x-icon" th:href="@{/images/favicon.ico}" href="../static/images/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/images/favicon.ico}" href="../static/images/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" th:href="@{https://mlp.hyundai-mnsoft.com:8244/api/map.css}" href="https://mlp.hyundai-mnsoft.com:8244/api/map.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}" href="../static/css/base.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/gnb.css}" href="../static/css/gnb.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/map.css}" href="../static/css/map.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/pannel.css}" href="../static/css/pannel.css">
+
+    <title>PlayMap</title>
+</head>
+
+<body>
+    <div id="skip">
+        <a href="#nav"><span>본문으로 바로가기</span></a>
+    </div>
+
+    <div id="div_loading">
+        <img th:src="@{/images/loading.gif}" src="../static/images/loading.gif" alt="로딩중" title="로딩중" />
+    </div>
+
+    <aside id="aside">
+        <nav id="nav">
+            <h3 class="blind">본문메뉴</h3>
+            <ul class="navlist">
+                <li><a href="#" role="button" class="hmn_search toggle active" data-menu-id="search">Places</a></li>
+                <li><a href="#" role="button" class="hmn_course toggle" data-menu-id="course">Directions</a></li>
+                <li><a href="#" role="button" class="hmn_hd toggle" data-menu-id="hd">Hdmap</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <!-- #aside -->
+
+    <section id="search_panel" class="panel">
+        <!-- .panel 일 때 search_panel 활성화 -->
+        <div class="search_wrapper">
+            <header class="search_header">
+                <h1 class="logo">
+                    <img th:src="@{/images/logo_hyundal.gif}" src="../static/images/logo_hyundal.gif" alt="HYUNDAI MNSOFT MAPLE">
+                </h1>
+            </header>
+            <!-- .search_header -->
+
+            <div id="div_search" class="panel_cont active">
+                <article class="search_wrap">
+                    <div id="div_search_poi" class="active">
+                        <div class="search_form">
+                            <span class="search_window"> <input type="text"
+								class="tf_text tf_text_large txt_searchword"
+								placeholder="Search place, address ">
+								<button role="button" type="submit" class="btn btn_search">Search</button>
+							</span>
+                        </div>
+                        <div class="search_content">
+                            <h3 class="blind">검색결과 목록</h3>
+                            <div class="search_title">
+                                <h3>
+                                    Search results(<em><span class="span_total_count">0</span></em>)
+                                    <button role="button" class="btn_clear btn__search--reset">
+										<span class="blind">검색초기화</span>
+									</button>
+                                </h3>
+                            </div>
+
+                            <ul class="search_list">
+                            </ul>
+                        </div>
+
+                        <nav class="pagination"></nav>
+                    </div>
+                </article>
+            </div>
+
+            <div id="div_course" class="panel_cont">
+                <article class="search_wrap">
+                    <div id="div_course_course" class="active">
+                        <ul class="input_wrap">
+                            <li class="li_start">
+                                <dl>
+                                    <dd>
+                                        <input class="tf_text tf_text_large txt_start_point" placeholder="Choose starting point" /> <input type="hidden" class="hid_x" value="" /> <input type="hidden" class="hid_y" value="" />
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li class="li_goal">
+                                <dl>
+                                    <dd>
+                                        <input class="tf_text tf_text_large txt_goal_point" placeholder="Choose destination " /> <input type="hidden" class="hid_x" value="" /> <input type="hidden" class="hid_y" value="" />
+                                    </dd>
+                                </dl>
+                            </li>
+                        </ul>
+                        <div class="div_switch">
+                            <img src="../static/images/pannel/switch.png" />
+                        </div>
+
+                        <div class="condition_tag">
+                            <div class="btn__group--tag">
+                                <button role="button" class="btn round active btn_add_waypoint">+
+									Add destination </button>
+                                <button role="button" class="btn round active btn_route">Get directions</button>
+                            </div>
+                        </div>
+
+                        <div class="search_content">
+                            <h3 class="blind">검색결과 목록</h3>
+                            <div class="search_title">
+                                <h3>
+                                    Search results(<em><span class="span_total_count">0</span></em>)
+                                    <button role="button" class="btn_clear btn__search--reset">
+										<span class="blind">검색초기화</span>
+									</button>
+                                </h3>
+                            </div>
+
+                            <ul class="search_list"></ul>
+                        </div>
+
+                        <nav class="pagination"></nav>
+
+                    </div>
+                </article>
+            </div>
+
+            <div id="div_hd" class="panel_cont">
+                <article class="search_wrap">
+                    <div id="div_hd_hd" style="text-align:left;" class="active">
+                        <div class="title" style="text-align:center;"></div>
+                        <div class="content" style="padding-bottom:10px;">
+                            Hyundai Mnsoft has built a HD Map for 16,000km of Domestic Vehicle Road and constantly expanding HD Map through advancement and efficiency of map building technology.
+                            <br /><br />Experience the HD Map built by Hyundai Mnsoft through HD Map data sample.
+
+                        </div>
+                        <!--						
+						<div class="link" style="text-align:center;">
+							<a href="/API/support/"
+								target="_blank">[문의하기]</a> <a
+								href="http://hyundai-mnsoft.com/KR/aboutus/pressreleases/all.mms"
+								target="_blank">[관련 뉴스 보기]</a>
+						</div>
+-->
+                        <div>
+                            <dd style="display:block;width:100%;margin-bottom:15px;padding: 10px 13px;border: 1px solid #dbe0e5;border-radius: 4px; text-align:left;">
+                                <font color='black'><b>※ HD Map Data</b></font><br />
+                                <span>Road Link :</span>
+                                <font color='#ff0000'> ■</font><br />
+                                <span>Lane Division :</span>
+                                <font color='#B1B1B1'> ■</font><br />
+                                <span>Vehicle Road Center :</span>
+                                <font color='#6a290b'> ■</font><br /> Vehicel Road Boundary :
+                                <font color='#f0f0f0'>■</font>
+                                <font color='#ffaa00'>■</font>
+                                <font color='#00aaff'>■</font><br />
+                                <span>Road Boundary :</span>
+                                <font color='#5b6538'> ■</font><br />
+                                <span>Road Surface Mark :</span>
+                                <font color='#80fb9b'> ■</font><br />
+                                <span>Road Sign :</span>
+                                <font color='#2477A9'> ■</font><br />
+                                <span>Traffic Sign :</span>
+                                <font color='#FF0000'> ■</font><br />
+                                <span>Traffic Light :</span>
+                                <font color='#C785C8'> ■</font>
+                            </dd>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <div class="position_info">
+            <div class="panel_control">
+                <button role="button" class="btn__panel--close">검색창확장활성화</button>
+            </div>
+        </div>
+        <!-- .search_wrapper -->
+    </section>
+    <!-- #search_pannel -->
+
+    <section class="wrapper">
+        <div id="map"></div>
+        <aside id="map_control">
+            <h3 class="blind">지도 컨트롤</h3>
+            <nav id="map_properties">
+                <ul class="hmn_widget">
+                    <li class="item_control li_zoom_in">
+                        <button role="button" class="btn_zoom_in" title="확대">
+							<div class="r_ibtn">
+								<span class="spin"> <img class="img_default"
+									th:src="@{/images/r_icon/r_line05_01.png}"
+									src="../static/images/r_icon/r_line05_01.png" alt="확대 아이콘">
+									<img th:src="@{/images/r_icon/ro_line05_01.png}"
+									class="img_over" src="../static/images/r_icon/ro_line05_01.png"
+									alt="확대 아이콘">
+								</span>
+							</div>
+							<span></span>
+						</button>
+                    </li>
+                    <li class="item_control li_zoom_out">
+                        <button role="button" class="btn_zoom_out" title="축소">
+							<div class="r_ibtn">
+								<span> <img class="img_default"
+									th:src="@{/images/r_icon/r_line06_01.png}"
+									src="../static/images/r_icon/r_line06_01.png" alt="축소 아이콘">
+									<img th:src="@{/images/r_icon/ro_line06_01.png}"
+									class="img_over" src="../static/images/r_icon/ro_line06_01.png"
+									alt="축소 아이콘">
+								</span>
+							</div>
+							<span></span>
+						</button>
+                    </li>
+                    <li class="item_control li_measure">
+                        <button role="button" class="btn_option rbtn_item btn_measure btn_distance btn_interaction" data-interaction="LineString">
+							<div class="r_ibtn">
+								<span class="skew"> <img class="img_default"
+									th:src="@{/images/r_icon/r_line07_01.png}"
+									src="../static/images/r_icon/r_line07_01.png" alt="길이재기 아이콘">
+									<img th:src="@{/images/r_icon/ro_line07_01.png}"
+									class="img_over" src="../static/images/r_icon/ro_line07_01.png"
+									alt="길이재기 아이콘">
+								</span>
+							</div>
+							<span>Measure Distance</span>
+						</button>
+                        <div class="item_list size">
+                            <ul>
+                                <li><button role="button" class="rbtn_item btn_clear reset_btn">
+										<div class="r_ibtn">
+											<span> <img class="img_default"
+												th:src="@{/images/r_icon/r_line07_04.png}"
+												src="../static/images/r_icon/r_line07_04.png" alt="지우기 아이콘">
+												<img th:src="@{/images/r_icon/ro_line07_04.png}"
+												class="img_over"
+												src="../static/images/r_icon/ro_line07_04.png" alt="지우기 아이콘">
+											</span>
+										</div>
+										<span>Clear</span>
+									</button></li>
+                                <li><button role="button" class="rbtn_item btn_measure btn_radius  btn_interaction" data-interaction="Circle">
+										<div class="r_ibtn">
+											<span> <img class="img_default"
+												th:src="@{/images/r_icon/r_line07_03.png}"
+												src="../static/images/r_icon/r_line07_03.png" alt="반경측정 아이콘">
+												<img th:src="@{/images/r_icon/ro_line07_03.png}"
+												class="img_over"
+												src="../static/images/r_icon/ro_line07_03.png"
+												alt="반경측정 아이콘">
+											</span>
+										</div>
+										<span>Measure Radius</span>
+									</button></li>
+                                <li><button role="button" class="rbtn_item btn_measure btn_area btn_interaction" data-interaction="Polygon">
+										<div class="r_ibtn">
+											<span> <img class="img_default"
+												th:src="@{/images/r_icon/r_line07_02.png}"
+												src="../static/images/r_icon/r_line07_02.png" alt="면적재기 아이콘">
+												<img th:src="@{/images/r_icon/ro_line07_02.png}"
+												class="img_over"
+												src="../static/images/r_icon/ro_line07_02.png"
+												alt="면적재기 아이콘">
+											</span>
+										</div>
+										<span>Measure Area</span>
+									</button></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="item_control li_reset">
+                        <button role="button" class="btn_reset">
+							<div class="r_ibtn">
+								<span class="updown"> <img class="img_default"
+									th:src="@{/images/r_icon/r_line11_01.png}"
+									src="../static/images/r_icon/r_line11_01.png" alt="초기화 아이콘">
+								</span>
+							</div>
+							<span>Reset</span>
+						</button>
+                    </li>
+            </nav>
+        </aside>
+
+
+    </section>
+    <!-- .wrapper -->
+
+    <script th:src="@{//cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL,console,String.prototype.startsWith,Object.assign,String.prototype.trim,Array.prototype.includes}" src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL,console,String.prototype.startsWith,Object.assign,String.prototype.trim,Array.prototype.includes"></script>
+
+    <script th:src="@{//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js}" src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+    <script th:src="https://mlpams.hyundai-mnsoft.com:9044/auth/jsapi?ApiKey=74447639-1DEC-42A9-9942-D8A3CB5E39A6" src="https://mlpams.hyundai-mnsoft.com:9044/auth/jsapi?ApiKey=74447639-1DEC-42A9-9942-D8A3CB5E39A6"></script>
+
+    <script th:src="@{/js/maple.js}" src="../static/js/maple.js"></script>
+    <script th:src="@{/js/common/utils.js}" src="../static/js/common/utils.js"></script>
+    <script th:src="@{/js/map/map.js}" src="../static/js/map/map.js"></script>
+
+    <script th:src="@{/js/menu/search.js}" src="../static/js/menu/search.js"></script>
+
+    <script th:src="@{/js/menu/course.js}" src="../static/js/menu/course.js"></script>
+
+    <script th:src="@{/js/menu/hd.js}" src="../static/js/menu/hd.js"></script>
+
+    <script>
+        $(function() {
+
+            maple.init();
+        });
+    </script>
+
+</body>
+
+</html>

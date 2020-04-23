@@ -1,0 +1,23 @@
+@font-face {
+    font-family: 'HDharmonyL';
+    src: url('HDharmonyL.eot');
+    src: url('HDharmonyL.eot?#iefix') format('embedded-opentype'), url('HDharmonyL.svg#HDharmonyL') format('svg'), url('HDharmonyL.ttf') format('truetype'), url('HDharmonyL.woff') format('woff'), url('HDharmonyL.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'HDharmonyM';
+    src: url('HDharmonyM.eot');
+    src: url('HDharmonyM.eot?#iefix') format('embedded-opentype'), url('HDharmonyM.svg#HDharmonyM') format('svg'), url('HDharmonyM.ttf') format('truetype'), url('HDharmonyM.woff') format('woff'), url('HDharmonyM.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'HDharmonyB';
+    src: url('HDharmonyB.eot');
+    src: url('HDharmonyB.eot?#iefix') format('embedded-opentype'), url('HDharmonyB.svg#HDharmonyB') format('svg'), url('HDharmonyB.ttf') format('truetype'), url('HDharmonyB.woff') format('woff'), url('HDharmonyB.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
